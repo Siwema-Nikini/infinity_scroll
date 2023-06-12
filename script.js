@@ -30,7 +30,7 @@ function imageLoaded() {
 //Helper Function to set Attributes on DOM Elements
 function setAttributes(element, attributes) {
     console.log('Entering setAttributes');
-    for (const key in Attributes) {
+    for (const key in attributes) {
         Element.setAttribute(key, attributes[key]);
     }
 }
