@@ -1,5 +1,6 @@
-const imageContainer = document.getElementById("image-container");
-const loader = document.getElementById("loader");
+console.log("STarting the script");
+const imageContainer = document.getElementById('image-container');
+const loader = document.getElementById('loader');
 
 let ready = false;
 let imagesLoaded = 0;
@@ -14,10 +15,10 @@ const apiURL = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&coun
 
 
 //check if all images were loaded
-function imageLoaded(){
-    console.log("imageLoaded")
-    imagesLoaded++
-    console.log("imagesLoaded")
+function imageLoaded() {
+    console.log('imageLoaded')
+    imagesLoaded++;
+    console.log("imagesLoaded");
     if (imagesLoaded === totalImages){
         ready= true;
         loader.hidden = true;
@@ -28,12 +29,14 @@ function imageLoaded(){
 
 //Helper Function to set Attributes on DOM Elements
 function setAttributes(element, attributes) {
+    console.log('Entering setAttributes');
     for (const key in Attributes) {
-        Element.setAttributes(key, attributes[key]);
+        Element.setAttribute(key, attributes[key]);
     }
 }
 
-function displayPhotos(){
+function displayPhotos() {
+    console.log('In the displayPhotos() function');
     imagesLoaded = 0;
     totalImages = photosArray.length;
     console.log('total images', totalImages);
@@ -43,8 +46,8 @@ function displayPhotos(){
         //item.setAttribute('href',photo.links.html);
         //item.setAttribute('target','_blank');
         setAttributes(item, {
-            href: photo.link.html,
-            target: '_blank'
+            href: photo.links.html,
+            target: '_blank',
         });
 
         //Create <img> for photo
@@ -52,7 +55,7 @@ function displayPhotos(){
         //img.setAttribute('src', photo.urls.regular);
         //img.setAttribute('alt', photo.alt_description);
         //img.setAttribute('title', photo.alt_description);
-        setAttributes(item, {
+        setAttributes(img, {
             src: photo.urls.regular,
             alt: photo.alt_description,
             title: photo.alt_description,
@@ -69,6 +72,7 @@ function displayPhotos(){
 
 //get photos from Unsplash API
 async function getPhotos(){
+    console.log("In the getPhotos() function, trying to get photos");
     try {
         const response = await fetch(apiURL);
         photosArray = await response.json();
